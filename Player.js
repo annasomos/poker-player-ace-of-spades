@@ -7,7 +7,7 @@ class Player {
     const cards = getCardsInGame(gameState);
     let handRank = 0;
     if (cards.length == 2) {
-      let amount = gameState.current_buy_in - gameState.players[gameState.in_action].bet
+      let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
       console.log("BET (TWO CARDS): ", amount)
       bet(amount);
       return;
