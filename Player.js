@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return "0.1";
+    return "YOLOBOT 2000";
   }
 
   static async betRequest(gameState, bet) {
