@@ -9,6 +9,7 @@ class Player {
 
     if (cards.length >= 6) {
       bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2));
+      return;
     }
 
 
