@@ -1,3 +1,5 @@
+const fetch = require("node-fetch");
+
 class Player {
   static get VERSION() {
     return "0.1";
@@ -8,7 +10,7 @@ class Player {
     let handRank = 0;
     try {
       handRank = await getHandRank(cards);
-      console.log("HAND RANK: ", handRank.rank, "ROUND: ",gameState.round);
+      console.log("HAND RANK: ", handRank, "ROUND: ",gameState.round);
 
     } catch (error) {
       console.error("Error getting hand rank: ", error);
