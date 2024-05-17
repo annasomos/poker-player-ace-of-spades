@@ -10,7 +10,7 @@ class Player {
       if (cards[0].rank == cards[1].rank) {
         let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
         console.log("BET (PAIR): ", amount)
-        bet(3000);
+        bet(findOurselves().stack); // DOUBLEING
         return;
       }
       let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
@@ -39,7 +39,7 @@ class Player {
       if (handRank > 1) {
         let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
         console.log(`BET (${cards.length}): `, amount)
-        bet(3000); // DOUBLEING
+        bet(findOurselves().stack); // DOUBLEING
         return;
       }
       let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
