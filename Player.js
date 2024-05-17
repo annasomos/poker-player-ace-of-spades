@@ -6,7 +6,7 @@ class Player {
   static async betRequest(gameState, bet) {
     const cards = getCardsInGame(gameState);
 
-    if (cards.length >= 6) {
+    if (cards.length > 6) {
       try {
         const handRank = await getHandRank(cards);
         console.log("HAND RANK: ", handRank.rank);
@@ -19,7 +19,11 @@ class Player {
         //   bet(gameState.current_buy_in);
         // }
 
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
+        if (handRank.rank > 0) {
+          bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
+        } else {
+          bet(0);
+        }
       } catch (error) {
         console.error("Error getting hand rank: ", error);
         bet(gameState.current_buy_in); // Fallback bet
