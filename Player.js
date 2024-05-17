@@ -18,12 +18,10 @@ class Player {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
         return;
       }
-      if (isNumeric(cards[0].rank) && isNumeric(cards[1].rank)) {
+      if (!isNumeric(handRank.rank)) {
         bet(0);
         return;
       }
-      bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
-      return;
     }
     try {
       handRank = await getHandRank(cards);
