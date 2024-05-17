@@ -5,29 +5,22 @@ class Player {
 
   static async betRequest(gameState, bet) {
     const cards = getCardsInGame(gameState);
+    try {
+      const handRank = await getHandRank(cards);
+      console.log("HAND RANK: ", handRank.rank, "ROUND: ",gameState.round);
 
-    if (cards.length > 6) {
-      try {
-        const handRank = await getHandRank(cards);
-        console.log("HAND RANK: ", handRank.rank);
+    } catch (error) {
+      console.error("Error getting hand rank: ", error);
+      bet(gameState.current_buy_in); // Fallback bet
+      return
+    }
 
-        // Use the handRank to decide your bet
-        // Example decision based on hand rank:
-        // if (handRank.rank >= someThreshold) {
-        //   bet(gameState.current_buy_in + someAmount);
-        // } else {
-        //   bet(gameState.current_buy_in);
-        // }
-
+    if (cards.length > 5) {
         if (handRank.rank > 0) {
           bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
         } else {
           bet(0);
         }
-      } catch (error) {
-        console.error("Error getting hand rank: ", error);
-        bet(gameState.current_buy_in); // Fallback bet
-      }
       return;
     }
 
