@@ -3,13 +3,27 @@ class Player {
     return "0.1";
   }
 
-  static betRequest(gameState, bet) {
+  static async betRequest(gameState, bet) {
     const cards = getCardsInGame(gameState);
 
     if (cards.length >= 6) {
-      bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2));
-      const handRank = getHandRank(cards);
-      console.log("HAND RANK: ", handRank.rank);
+      try {
+        const handRank = await getHandRank(cards);
+        console.log("HAND RANK: ", handRank.rank);
+
+        // Use the handRank to decide your bet
+        // Example decision based on hand rank:
+        // if (handRank.rank >= someThreshold) {
+        //   bet(gameState.current_buy_in + someAmount);
+        // } else {
+        //   bet(gameState.current_buy_in);
+        // }
+
+        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
+      } catch (error) {
+        console.error("Error getting hand rank: ", error);
+        bet(gameState.current_buy_in); // Fallback bet
+      }
       return;
     }
 
@@ -26,14 +40,13 @@ function findOurselves(gameState) {
 }
 
 function getCardsInGame(gameState) {
-  return findOurselves(gameState).hole_cards + gameState.community_cards;
+  const player = findOurselves(gameState);
+  return player.hole_cards.concat(gameState.community_cards);
 }
 
 async function getHandRank(cards) {
   const cardsJson = JSON.stringify(cards);
-
   const encodedCards = encodeURIComponent(cardsJson);
-
   const url = `https://rainman.leanpoker.org/rank?cards=${encodedCards}`;
 
   try {
@@ -44,10 +57,10 @@ async function getHandRank(cards) {
     }
 
     const data = await response.json();
-
     return data;
   } catch (error) {
     console.error("Error fetching ranking:", error);
+    throw error;
   }
 }
 
