@@ -4,7 +4,7 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
-    bet(gameState.small_blind * 2);
+    bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2));
   }
 
   static showdown(gameState) {
