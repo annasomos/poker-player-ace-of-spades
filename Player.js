@@ -99,7 +99,6 @@ function getCardsInGame(gameState) {
 }
 
 async function getHandRank(cards) {
-  console.log("GETTING HAND RANK FOR: ", cards);
   const cardsJson = JSON.stringify(cards);
   const encodedCards = encodeURIComponent(cardsJson);
   const url = `https://rainman.leanpoker.org/rank?cards=${encodedCards}`;
