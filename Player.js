@@ -32,18 +32,18 @@ class Player {
     if (cards.length >= 5) {
       if (handRank > 1) {
         let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
-        console.log("BET (TWO CARDS): ", amount)
+        console.log(`BET (${cards.length}): `, amount)
         bet(amount * 2); // DOUBLEING
         return;
       }
       let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
-      console.log("BET (TWO CARDS): ", amount)
+      console.log(`BET (${cards.length}): `, amount)
       bet(amount);
       return;
     }
 
     let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
-    console.log("BET (TWO CARDS): ", amount)
+    console.log(`FALLBACKBET (${cards.length}): `, amount)
     bet(amount);
   }
 
