@@ -31,10 +31,14 @@ class Player {
 
     if (cards.length == 5) {
       if (handRank > 1) {
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 2);
+        let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+        console.log("BET (TWO CARDS): ", amount)
+        bet(amount * 2); // DOUBLEING
         return;
       }
-      bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
+      let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+      console.log("BET (TWO CARDS): ", amount)
+      bet(amount);
       return;
     }
 
