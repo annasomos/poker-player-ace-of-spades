@@ -10,6 +10,7 @@ class Player {
       let amount = gameState.current_buy_in - gameState.players[gameState.in_action].bet
       console.log("BET (TWO CARDS): ", amount)
       bet(amount);
+      return;
     }
     try {
       handRank = await getHandRank(cards);
