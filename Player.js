@@ -1,3 +1,9 @@
+function isNumeric(str) {
+  if (typeof str != "string") return false // we only process strings!  
+  return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+    !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+}
+
 class Player {
   static get VERSION() {
     return "0.1";
@@ -7,6 +13,16 @@ class Player {
 
     const cards = getCardsInGame(gameState);
     let handRank;
+    if (cards.length == 2) {
+      if (cards[0].rank == cards[1].rank) { // if pair
+        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
+        return;
+      }
+      if (!isNumeric(handRank.rank)) {
+        bet(0);
+        return;
+      }
+    }
     try {
       handRank = await getHandRank(cards);
       console.log(
@@ -27,16 +43,6 @@ class Player {
       bet(3000);
     }
 
-    if (cards.length == 2) {
-      if (handRank.rank > 0) {
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
-        return;
-      }
-      if (handRank.value <= 10) {
-        bet(0);
-        return;
-      }
-    }
 
     if (cards.length == 5) {
       if (handRank.rank > 1) {
