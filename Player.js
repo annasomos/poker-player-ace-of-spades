@@ -8,15 +8,31 @@ class Player {
     let handRank = 0;
     try {
       handRank = await getHandRank(cards);
-      console.log("HAND RANK: ", handRank.rank, "ROUND: ", gameState.round, "CARDS LENGTH: ", cards.length);
+      console.log(
+        "HAND RANK: ",
+        handRank,
+        "ROUND: ",
+        gameState.round,
+        "CARDS LENGTH: ",
+        cards.length
+      );
     } catch (error) {
       console.error("Error getting hand rank: ", error);
       bet(gameState.current_buy_in); // Fallback bet
       return;
     }
 
+    if (cards.length == 2) {
+      if (handRank > 0) {
+        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
+        return;
+      }
+      bet(0);
+      return;
+    }
+
     if (cards.length == 5) {
-      if (handRank.rank > 1) {
+      if (handRank > 1) {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 2);
         return;
       }
@@ -25,15 +41,15 @@ class Player {
     }
 
     if (cards.length == 6) {
-      if (handRank.rank > 2) {
+      if (handRank > 2) {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 3);
         return;
       }
-      if (handRank.rank > 1) {
+      if (handRank > 1) {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 2);
         return;
       }
-      if (handRank.rank > 0) {
+      if (handRank > 0) {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
         return;
       }
@@ -42,15 +58,15 @@ class Player {
     }
 
     if (cards.length == 7) {
-      if (handRank.rank > 2) {
+      if (handRank > 2) {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 3);
         return;
       }
-      if (handRank.rank > 1) {
+      if (handRank > 1) {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 2);
         return;
       }
-      if (handRank.rank > 0) {
+      if (handRank > 0) {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
         return;
       }
