@@ -22,7 +22,7 @@ class Player {
       if (biggest >= 10) {
         let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
         console.log("BET (PAIR): ", amount)
-        bet(amount * 2);
+        bet(amount * 20);
         return;
       }
       let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
@@ -51,7 +51,7 @@ class Player {
       if (handRank > 1) {
         let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
         console.log(`BET (${cards.length}): `, amount)
-        bet(amount * 10); // DOUBLEING
+        bet(amount * 100); // DOUBLEING
         return;
       }
       let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
