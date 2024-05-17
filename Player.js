@@ -8,20 +8,19 @@ class Player {
     let handRank = 0;
     try {
       handRank = await getHandRank(cards);
-      console.log("HAND RANK: ", handRank.rank, "ROUND: ",gameState.round);
-
+      console.log("HAND RANK: ", handRank, "ROUND: ", gameState.round);
     } catch (error) {
       console.error("Error getting hand rank: ", error);
       bet(gameState.current_buy_in); // Fallback bet
-      return
+      return;
     }
 
     if (cards.length > 5) {
-        if (handRank > 0) {
-          bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
-        } else {
-          bet(0);
-        }
+      if (handRank > 0) {
+        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
+      } else {
+        bet(0);
+      }
       return;
     }
 
@@ -60,7 +59,6 @@ async function getHandRank(cards) {
     console.error("Error fetching ranking:", error);
     return 0;
   }
-
 }
 
 module.exports = Player;
