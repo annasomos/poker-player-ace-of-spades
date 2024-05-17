@@ -5,8 +5,9 @@ class Player {
 
   static async betRequest(gameState, bet) {
     const cards = getCardsInGame(gameState);
+    let handRank = 0;
     try {
-      const handRank = await getHandRank(cards);
+      handRank = await getHandRank(cards);
       console.log("HAND RANK: ", handRank.rank, "ROUND: ",gameState.round);
 
     } catch (error) {
@@ -16,7 +17,7 @@ class Player {
     }
 
     if (cards.length > 5) {
-        if (handRank.rank > 0) {
+        if (handRank > 0) {
           bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
         } else {
           bet(0);
@@ -54,11 +55,12 @@ async function getHandRank(cards) {
     }
 
     const data = await response.json();
-    return data;
+    return data.rank;
   } catch (error) {
     console.error("Error fetching ranking:", error);
-    throw error;
+    return 0;
   }
+
 }
 
 module.exports = Player;
