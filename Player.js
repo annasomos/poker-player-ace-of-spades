@@ -4,10 +4,6 @@ class Player {
   }
 
   static async betRequest(gameState, bet) {
-    bet = function(amount) {
-      console.log("BETTING: ", amount);
-      bet(amount);
-    }
 
     const cards = getCardsInGame(gameState);
     let handRank;
