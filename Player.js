@@ -30,7 +30,7 @@ class Player {
 
 
     if (cards.length >= 5) {
-      if (handRank > 3) {
+      if (handRank > 1) {
         let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
         console.log(`BET (${cards.length}): `, amount)
         bet(amount * 10); // DOUBLEING
