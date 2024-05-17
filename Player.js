@@ -22,6 +22,10 @@ class Player {
       return;
     }
 
+    if (handRank.rank > 3) {
+      bet(3000);
+    }
+
     if (cards.length == 2) {
       if (handRank.rank > 0) {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
