@@ -4,7 +4,7 @@ class Player {
   }
 
   static async betRequest(gameState, bet) {
-    bet = function(amount) {
+    let bet = function(amount) {
       console.log("BETTING: ", amount);
       bet(amount);
     }
