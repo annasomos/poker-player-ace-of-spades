@@ -5,7 +5,6 @@ class Player {
 
   static betRequest(gameState, bet) {
     const cards = getCardsInGame(gameState);
-    console.log("CARDS", cards.player.cards);
 
     if (cards.length >= 6) {
       bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2));
