@@ -27,8 +27,6 @@ class Player {
         bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
         return;
       }
-      bet(0);
-      return;
     }
 
     if (cards.length == 5) {
