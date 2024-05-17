@@ -8,7 +8,7 @@ class Player {
     let handRank = 0;
     if (cards.length == 2) {
       if (cards[0].rank == cards[1].rank) {
-        let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+        let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
         console.log("BET (PAIR): ", amount)
         bet(amount * 50);
         return;
@@ -21,12 +21,12 @@ class Player {
       let biggest = Math.max(card1val, card2val);
       console.log("BIGGEST: ", biggest, card1val, card2val, cards[0].rank, cards[1].rank);
       if (biggest >= 10) {
-        let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+        let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
         console.log("BET (PAIR): ", amount)
         bet(amount * 20);
         return;
       }
-      let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+      let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
       console.log("BET (TWO CARDS): ", amount)
       bet(amount);
       return;
@@ -50,18 +50,18 @@ class Player {
 
     if (cards.length >= 5) {
       if (handRank > 1) {
-        let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+        let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
         console.log(`BET (${cards.length}): `, amount)
         bet(amount * 100); // DOUBLEING
         return;
       }
-      let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+      let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
       console.log(`BET (${cards.length}): `, amount)
       bet(amount);
       return;
     }
 
-    let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+    let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
     console.log(`FALLBACKBET (${cards.length}): `, amount)
     bet(amount);
   }
