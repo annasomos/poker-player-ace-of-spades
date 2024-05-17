@@ -13,19 +13,6 @@ class Player {
         bet(3000);
         return;
       }
-      let possibleCards = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-
-      let card1val = possibleCards.indexOf(cards[0].rank);
-      let card2val = possibleCards.indexOf(cards[1].rank);
-
-      let biggest = Math.max(card1val, card2val);
-      console.log("BIGGEST: ", biggest, card1val, card2val, cards[0].rank, cards[1].rank);
-      if (biggest >= 10) {
-        let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
-        console.log("BET (PAIR): ", amount)
-        bet(3000); // DOUBLEING
-        return;
-      }
       let amount = Math.max(gameState.small_blind * 2, gameState.players[gameState.in_action].bet)
       console.log("BET (TWO CARDS): ", amount)
       bet(amount);
