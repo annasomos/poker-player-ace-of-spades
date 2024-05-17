@@ -6,6 +6,11 @@ class Player {
   static async betRequest(gameState, bet) {
     const cards = getCardsInGame(gameState);
     let handRank = 0;
+    if (cards.length == 2) {
+      let amount = gameState.current_buy_in - gameState.players[gameState.in_action].bet
+      console.log("BET (TWO CARDS): ", amount)
+      bet(amount);
+    }
     try {
       handRank = await getHandRank(cards);
       console.log(
@@ -22,12 +27,6 @@ class Player {
       return;
     }
 
-    if (cards.length == 2) {
-      if (handRank > 0) {
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
-        return;
-      }
-    }
 
     if (cards.length == 5) {
       if (handRank > 1) {
