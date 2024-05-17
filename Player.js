@@ -7,7 +7,7 @@ class Player {
     const cards = getCardsInGame(gameState);
     let handRank;
     try {
-      handRank.rank = await getHandRank(cards);
+      handRank = await getHandRank(cards);
       console.log(
         "HAND RANK: ",
         handRank,
