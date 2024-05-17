@@ -4,7 +4,7 @@ class Player {
   }
 
   static betRequest(gameState, bet) {
-    bet(0);
+    bet(gameState.small_blind * 2);
   }
 
   static showdown(gameState) {
