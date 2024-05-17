@@ -29,7 +29,7 @@ class Player {
     }
 
 
-    if (cards.length == 5) {
+    if (cards.length >= 5) {
       if (handRank > 1) {
         let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
         console.log("BET (TWO CARDS): ", amount)
@@ -42,41 +42,9 @@ class Player {
       return;
     }
 
-    if (cards.length == 6) {
-      if (handRank > 2) {
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 3);
-        return;
-      }
-      if (handRank > 1) {
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 2);
-        return;
-      }
-      if (handRank > 0) {
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
-        return;
-      }
-      bet(0);
-      return;
-    }
-
-    if (cards.length == 7) {
-      if (handRank > 2) {
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 3);
-        return;
-      }
-      if (handRank > 1) {
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2) * 2);
-        return;
-      }
-      if (handRank > 0) {
-        bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2)); // Example decision
-        return;
-      }
-      bet(0);
-      return;
-    }
-
-    bet(Math.max(gameState.current_buy_in, gameState.small_blind * 2));
+    let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+    console.log("BET (TWO CARDS): ", amount)
+    bet(amount);
   }
 
   static showdown(gameState) {
