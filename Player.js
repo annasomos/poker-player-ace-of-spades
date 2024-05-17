@@ -7,12 +7,12 @@ class Player {
     const cards = getCardsInGame(gameState);
     let handRank = 0;
     if (cards.length == 2) {
-      // if (cards[0].rank === cards[1].rank) {
-      //   let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
-      //   console.log("BET (PAIR): ", amount)
-      //   bet(amount * 5);
-      //   return;
-      // }
+      if (cards[0].rank == cards[1].rank) {
+        let amount = Math.max(gameState.small_blind * 2, gameState.current_buy_in - gameState.players[gameState.in_action].bet)
+        console.log("BET (PAIR): ", amount)
+        bet(amount * 5);
+        return;
+      }
       // let cards = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "J", "Q", "K", "A"]
       // let biggest = Math.max(cards[0].rank, cards[1].rank);
       // if (biggest >= 10) {
